@@ -57,6 +57,22 @@
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
         };
+          // 기존 loadHTML 함수 아래에 추가하세요
+function openModal() {
+    document.getElementById('donationModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('donationModal').style.display = 'none';
+}
+
+// 팝업 바깥 영역 클릭 시 닫기
+window.onclick = function(event) {
+    const modal = document.getElementById('donationModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
     </script>
 </body>
 </html>
