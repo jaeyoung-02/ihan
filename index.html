@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>52패밀리 스타일 클론</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 스타일 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* 헤더 스타일 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 24px; font-weight: bold; color: #e67e22; }
+        nav ul { display: flex; gap: 30px; }
+        nav ul li { font-weight: 500; }
+        .nav-buttons { display: flex; gap: 10px; }
+        .btn-donation { background: #e67e22; color: #fff; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+
+        /* 히어로 섹션 */
+        .hero {
+            height: 500px;
+            background: #fdf2e9; /* 실제 사이트 이미지 대신 배경색 처리 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #444; }
+        .hero p { font-size: 18px; margin-bottom: 30px; color: #666; }
+
+        /* 메인 후원 카드 섹션 */
+        .section { padding: 80px 10%; text-align: center; }
+        .section-title { font-size: 32px; margin-bottom: 50px; position: relative; }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card-img { height: 200px; background: #ddd; }
+        .card-body { padding: 25px; }
+        .card-body h3 { margin-bottom: 15px; color: #e67e22; }
+        .card-body p { font-size: 14px; color: #777; margin-bottom: 20px; }
+        .btn-card { display: inline-block; border: 1px solid #e67e22; color: #e67e22; padding: 5px 15px; border-radius: 5px; }
+
+        /* 푸터 스타일 */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 50px 10%;
+            font-size: 14px;
+        }
+        .footer-info { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+        .footer-info div { flex: 1; min-width: 250px; }
+        .footer-bottom { margin-top: 30px; border-top: 1px solid #555; padding-top: 20px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">52 FAMILY</div>
+        <nav>
+            <ul>
+                <li><a href="#">후원 / 봉사</a></li>
+                <li><a href="#">소식</a></li>
+                <li><a href="#">소개</a></li>
+            </ul>
+        </nav>
+        <div class="nav-buttons">
+            <a href="#" class="btn-donation">바로 후원하기</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>오병이어 기적을 만들어 가는<br>52패밀리</h1>
+        <p>도움이 필요한 아동과 청년들을 위해 사랑을 실천합니다.</p>
+        <a href="#" class="btn-donation" style="padding: 15px 40px;">자세히 보기</a>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">52패밀리의 주요 가치</h2>
+        <div class="card-container">
+            <div class="card">
+                <div class="card-img"></div>
+                <div class="card-body">
+                    <h3>이모 가족</h3>
+                    <p>정기적인 만남을 통해 아이들에게 평생의 가족이 되어주세요.</p>
+                    <a href="#" class="btn-card">신청하기</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img"></div>
+                <div class="card-body">
+                    <h3>물질 후원</h3>
+                    <p>아이들의 필요에 관심을 기울이고 소통하는 이모 삼촌이 되어주세요.</p>
+                    <a href="#" class="btn-card">신청하기</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img"></div>
+                <div class="card-body">
+                    <h3>자립준비청년 후원</h3>
+                    <p>청년들에게 오늘을 살아갈 수 있는 힘이 되어 주세요.</p>
+                    <a href="#" class="btn-card">신청하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <div>
+                <h4>사단법인 52패밀리</h4>
+                <p>주소: 서울특별시 강남구 선릉로 145길 7, 2층</p>
+                <p>이메일: 52familynet@naver.com</p>
+                <p>후원상담: 02-6925-5170</p>
+            </div>
+            <div>
+                <h4>후원계좌 안내</h4>
+                <p>국민은행 346501-04-299561</p>
+                <p>예금주: 사단법인 52패밀리</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright 2023 사단법인 52패밀리. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
