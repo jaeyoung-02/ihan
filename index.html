@@ -5,90 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IHAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        /* 기본 스타일 초기화 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333; }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-
-        /* 헤더 스타일 */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .logo { font-size: 24px; font-weight: bold; color: #003366; }
-        nav ul { display: flex; gap: 30px; }
-        nav ul li { font-weight: 500; }
-        .nav-buttons { display: flex; gap: 10px; }
-        .btn-donation { background: #e67e22; color: #fff; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
-
-        /* 히어로 섹션 */
-        .hero {
-            height: 500px;
-            background: #fdf2e9; /* 실제 사이트 이미지 대신 배경색 처리 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #444; }
-        .hero p { font-size: 18px; margin-bottom: 30px; color: #666; }
-
-        /* 메인 후원 카드 섹션 */
-        .section { padding: 80px 10%; text-align: center; }
-        .section-title { font-size: 32px; margin-bottom: 50px; position: relative; }
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .card {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        .card:hover { transform: translateY(-10px); }
-        .card-img { height: 200px; background: #ddd; }
-        .card-body { padding: 25px; }
-        .card-body h3 { margin-bottom: 15px; color: #e67e22; }
-        .card-body p { font-size: 14px; color: #777; margin-bottom: 20px; }
-        .btn-card { display: inline-block; border: 1px solid #e67e22; color: #e67e22; padding: 5px 15px; border-radius: 5px; }
-
-        /* 푸터 스타일 */
-        footer {
-            background: #333;
-            color: #fff;
-            padding: 50px 10%;
-            font-size: 14px;
-        }
-        .footer-info { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
-        .footer-info div { flex: 1; min-width: 250px; }
-        .footer-bottom { margin-top: 30px; border-top: 1px solid #555; padding-top: 20px; color: #999; }
-    </style>
-</head>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
-
     <header>
-        <div class="logo">
-    <a href="index.html" style="text-decoration: none; color: inherit;">IHAN</a>
-</div>
+        <div class="logo"><a href="index.html">IHAN</a></div>
         <nav>
             <ul>
                 <li><a href="huwon.html">후원 / 봉사</a></li>
                 <li><a href="#">소식</a></li>
-                <li><a href="#">소개</a></li>
+                <li>
+                    <a href="#">소개</a>
+                    <ul class="dropdown">
+                        <li><a href="#">인사말/비전</a></li>
+                        <li><a href="#">연혁</a></li>
+                        <li><a href="#">오시는 길</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div class="nav-buttons">
@@ -96,41 +28,43 @@
         </div>
     </header>
 
-    <section class="hero">
-        <h1>페이지 제작중<br>입니다</h1>
-        <p>텍스트.</p>
-        <a href="#" class="btn-donation" style="padding: 15px 40px;">자세히 보기</a>
-    </section>
+    <main>
+        <section class="hero">
+            <h1>페이지 제작중<br>입니다</h1>
+            <p>텍스트.</p>
+            <a href="#" class="btn-donation" style="padding: 15px 40px;">자세히 보기</a>
+        </section>
 
-    <section class="section">
-        <h2 class="section-title">IHAN(이한) 이란?</h2>
-        <div class="card-container">
-            <div class="card">
-                <div class="card-img"></div>
-                <div class="card-body">
-                    <h3>이모 가족</h3>
-                    <p>정기적인 만남을 통해 아이들에게 평생의 가족이 되어주세요.</p>
-                    <a href="#" class="btn-card">신청하기</a>
+        <section class="section">
+            <h2 class="section-title">IHAN(이한) 이란?</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-body">
+                        <h3>이모 가족</h3>
+                        <p>정기적인 만남을 통해 아이들에게 평생의 가족이 되어주세요.</p>
+                        <a href="#" class="btn-card">신청하기</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-body">
+                        <h3>물질 후원</h3>
+                        <p>아이들의 필요에 관심을 기울이고 소통하는 이모 삼촌이 되어주세요.</p>
+                        <a href="#" class="btn-card">신청하기</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-body">
+                        <h3>자립준비청년 후원</h3>
+                        <p>청년들에게 오늘을 살아갈 수 있는 힘이 되어 주세요.</p>
+                        <a href="#" class="btn-card">신청하기</a>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-img"></div>
-                <div class="card-body">
-                    <h3>물질 후원</h3>
-                    <p>아이들의 필요에 관심을 기울이고 소통하는 이모 삼촌이 되어주세요.</p>
-                    <a href="#" class="btn-card">신청하기</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img"></div>
-                <div class="card-body">
-                    <h3>자립준비청년 후원</h3>
-                    <p>청년들에게 오늘을 살아갈 수 있는 힘이 되어 주세요.</p>
-                    <a href="#" class="btn-card">신청하기</a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-info">
@@ -142,21 +76,11 @@
             <div>
                 <h4>후원 안내</h4>
                 <p>후원 상담 연락처로 연락 부탁드립니다.</p>
-                <!--<p></p>-->
             </div>
         </div>
         <div class="footer-bottom">
             Copyright 2026 비영리단체 IHAN. All rights reserved.
         </div>
     </footer>
-
 </body>
-
 </html>
-
-
-
-
-
-
-
