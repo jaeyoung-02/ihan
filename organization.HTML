@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <header id="main-header"></header>
+
+    <main>
+<br>
+<br>
+<table style="width: 100%;"><tbody><tr><td style="width: 13.4783%; background-color: rgb(243, 243, 243);">
+<div style="text-align: center;"><strong><span style="font-size: 14px;">구분</span></strong><span style="font-size: 14px;"><br>
+</span></div></td><td style="width: 16.8039%; background-color: rgb(243, 243, 243);">
+<div style="text-align: center;"><span style="font-size: 14px;"><strong>이름</strong><br></span></div>
+</td>
+<td style="width: 69.5729%; background-color: rgb(243, 243, 243);">
+<div style="text-align: center;"><span style="font-size: 14px;"><strong>업무</strong><br></span></div></td></tr><tr><td style="width: 13.4783%;">
+<div style="text-align: center;"><span style="font-size: 14px;">팀장</span></div></td><td style="width: 16.8039%;">
+  <div style="text-align: center;"><span style="font-size: 14px;">유연정</span></div></td><td style="width: 69.5729%;">
+    <div style="text-align: center;"><span style="font-size: 14px;">사업운영 총괄</span></div></td></tr><tr><td style="width: 13.4783%;">
+<div style="text-align: center;"><span style="font-size: 14px;">대리</span></div></td><td style="width: 16.8039%;">
+  <div style="text-align: center;"><span style="font-size: 14px;">김유빈</span></div></td><td style="width: 69.5729%;">
+    <div style="text-align: center;"><span style="font-size: 14px;">회계 · 행정,</span></div>
+    <div style="text-align: center;"><span style="font-size: 14px;">후원관리,&nbsp;위수탁사업 관리</span></div></td></tr><tr><td style="width: 13.4783%;">
+<div style="text-align: center;"><span style="font-size: 14px;">주임</span></div></td><td style="width: 16.8039%;">
+  <div style="text-align: center;"><span style="font-size: 14px;">엄희주</span></div></td><td style="width: 69.5729%;">
+    <div style="text-align: center;"><span style="font-size: 14px;">청소년 사례관리, 장학사업,</span></div>
+      <div style="text-align: center;"><span style="font-size: 14px;">바보의나눔 공모사업, 청소년행복학교</span></div></td></tr><tr><td style="width: 13.4783%;">
+<div style="text-align: center;"><span style="font-size: 14px;">주임</span></div></td><td style="width: 16.8039%;">
+  <div style="text-align: center;"><span style="font-size: 14px;">박일우</span></div></td><td style="width: 69.5729%;">
+    <div style="text-align: center;"><span style="font-size: 14px;">청소년 사례관리, 주거지원사업,</span></div>
+    <div style="text-align: center;"><span style="font-size: 14px;">사랑의열매 공모사업,</span></div>
+    <div style="text-align: center;"><span style="font-size: 14px;">아웃리치 지원사업</span></div></td></tr><tr><td style="width: 13.4783%;">
+<div style="text-align: center;"><span style="font-size: 14px;">주임</span></div></td><td style="width: 16.8039%;">
+  <div style="text-align: center;"><span style="font-size: 14px;">김빛나</span></div></td><td style="width: 69.5729%;">
+    <div style="text-align: center;"><span style="font-size: 14px;">청소년 사례관리,</span></div>
+    <div style="text-align: center;"><span style="font-size: 14px;">모금 캠페인, 119 맞춤형 지원사업</span></div></td></tr></tbody></table>
+
+
+
+
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script>
+        function loadHTML(id, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                })
+                .catch(error => console.error('Error loading HTML:', error));
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = function() {
+            loadHTML('main-header', 'header.html');
+            loadHTML('main-footer', 'footer.html');
+        };
+    </script>
+</body>
+</html>
