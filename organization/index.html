@@ -86,6 +86,44 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+        //아래 결제 모딕
+    async function requestPayment() {
+    try {
+        const response = await Bootpay.requestPayment({
+            "application_id": "697af17f714a026deec4b95e", // 필수 입력
+            "price": 10000, // 후원 금액 (예: 10,000원)
+            "order_name": "IHAN 후원금",
+            "order_id": "TEST_ORDER_ID_" + new Date().getTime(),
+            "pg": "kcp", // 사용 중인 PG사 설정
+            "method": "card", // 결제 수단 (card, phone, vbank 등)
+            "user": {
+                "id": "user_id_1234",
+                "username": "후원자",
+                "email": "test@test.com"
+            },
+            "extra": {
+                "open_type": "popup", // 팝업 형태로 결제창 표시
+                "card_quota": "0,2,3", // 할부 개월수 설정
+                "escrow": false
+            }
+        });
+
+        switch (response.event) {
+            case 'done':
+                alert("후원이 완료되었습니다. 감사합니다!");
+                closeModal();
+                break;
+            case 'issued':
+                // 가상계좌 입금 대기 등
+                break;
+            case 'error':
+                alert("결제 처리 중 오류가 발생했습니다: " + response.message);
+                break;
+        }
+    } catch (e) {
+        console.error(e.message);
+    }
+}
     </script>
 </body>
 </html>
