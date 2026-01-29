@@ -90,10 +90,10 @@ window.onclick = function(event) {
     async function requestPayment() {
     try {
         const response = await Bootpay.requestPayment({
-            "application_id": "697af17f714a026deec4b95e", // 필수 입력
+            "application_id": "default-widget", // 필수 입력
             "price": 10000, // 후원 금액 (예: 10,000원)
             "order_name": "IHAN 후원금",
-            "order_id": "TEST_ORDER_ID_" + new Date().getTime(),
+            "order_id": "697af17f714a026deec4b95e" + new Date().getTime(),
             "pg": "kcp", // 사용 중인 PG사 설정
             "method": "card", // 결제 수단 (card, phone, vbank 등)
             "user": {
