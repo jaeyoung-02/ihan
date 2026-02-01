@@ -6,26 +6,23 @@
     <title>IHAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"> 
-
 </head>
 <body>
     <header id="main-header"></header>
 
     <main>
         <section class="hero">
-    <img src="/images/logo.png" alt="IHAN 로고" style="width: 200px; height: auto;">
-    
-    <h1 style="color: #00aaff; margin-top: 20px; font-size: 2.5rem;">이한(IHAN)</h1>
-    
-    <a href="#section" class="btn-donation" style="margin-top: 30px; padding: 12px 30px; cursor: pointer;">자세히 보기</a>
-</section>
+            <img src="/images/logo.png" alt="IHAN 로고" style="width: 200px; height: auto;">
+            
+            <h1 style="color: #00aaff; margin-top: 20px; font-size: 2.5rem;">이한(IHAN)</h1>
+            
+            <a href="#about-section" class="btn-donation" style="margin-top: 30px; padding: 15px 40px; cursor: pointer;">자세히 보기</a>
+        </section>
 
-    
-<section class="section">
+        <section id="about-section" class="section">
             <h2 class="section-title">IHAN(이한) 이란?</h2>
             <div class="card-container">
                 <div class="card">
-                    <div class="card-img"></div>
                     <div class="card-body">
                         <h3>직원들을 소개합니다</h3>
                         <p>복지를 위해 헌신하는 직원들 입니다.</p>
@@ -33,19 +30,10 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-img"></div>
                     <div class="card-body">
                         <h3>비전</h3>
                         <p>우리의 비전을 소개합니다.</p>
-                        <a href="/vision"class="btn-card">비전 보기</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>함께하는 분들</h3>
-                        <p>우리와 동행하시는 분들과 기관을 소개합니다.</p>
-                        <a href="#" class="btn-card">보러가기</a>
+                        <a href="/vision" class="btn-card">비전 보기</a>
                     </div>
                 </div>
             </div>
@@ -64,37 +52,13 @@
                 .catch(error => console.error('Error loading HTML:', error));
         }
 
-        // 페이지 로드 시 실행
         window.onload = function() {
             loadHTML('main-header', 'header.html');
             loadHTML('main-footer', 'footer.html');
-                  };
-          // 기존 loadHTML 함수 아래에 추가하세요
-function openModal() {
-    document.getElementById('donationModal').style.display = 'flex';
-}
+        };
 
-function closeModal() {
-    document.getElementById('donationModal').style.display = 'none';
-}
-
-// 팝업 바깥 영역 클릭 시 닫기
-window.onclick = function(event) {
-    const modal = document.getElementById('donationModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
+        function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
