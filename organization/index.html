@@ -38,7 +38,7 @@
         }
 
         .profile-card {
-            background-color: #003366; /* 진한 파랑 배경 */
+            background-color: #003366; /* 진한 파랑 */
             width: 380px;
             padding: 40px 20px;
             border-radius: 20px;
@@ -59,11 +59,20 @@
         .close-btn:hover { opacity: 1; }
 
         #p-name { font-size: 28px; margin-bottom: 5px; color: #ffffff; }
-        #p-position { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; } /* 직책: 밝은 하늘색 */
+        #p-position { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; }
         
         .profile-details { text-align: left; padding: 0 20px; }
         .profile-details p { color: #D3D3D3; margin: 12px 0; font-size: 15px; }
         .profile-details strong { color: #ffffff; margin-right: 10px; display: inline-block; width: 70px; }
+
+        /* 하이퍼링크 스타일 (전화, 이메일) */
+        .profile-details a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .profile-details a:hover {
+            text-decoration: underline;
+        }
 
         /* 담당 업무 섹션 구분선 */
         .task-divider {
@@ -81,7 +90,7 @@
 
     <main style="min-height: 600px;"> <br><br>
         <div class="inside" style="padding: 0 10%;">
-            <h2 style="font-size: 30px; margin-bottom: 20px;">사무국 구성원</h2>
+            <h2 style="font-size: 30px; margin-bottom: 20px;">구성원</h2>
             <hr style="border: 1px solid #000; margin-bottom: 30px;">
             
             <table class="member-table">
@@ -94,19 +103,19 @@
                 <tbody>
                     <tr>
                         <td>대표</td>
-                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '02-123-4567', 'bamel@ihan.or.kr', '법인 총괄 운영 및 대외 협력')">김태경</span></td>                    
+                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '', 'bamel@ihan.or.kr', '법인 총괄 운영 및 대외 협력')">김태경</span></td>                    
                     </tr>
                     <tr>
                         <td>행정 팀장</td>
-                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '070-8983-2821', 'jaeyoung@ihan.or.kr', '회계 관리, 인사 및 사무국 행정 총괄')">하재영</span></td>                        
+                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '070-8983-2821', 'jaeyoungjaeyoung@ihan.or.kr', '회계 관리, 인사 및 사무국 행정 총괄')">하재영</span></td>                        
                     </tr>
                     <tr>
                         <td>홍보 팀장</td>
-                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', ' ', ' ', '온라인 마케팅, 보도자료 작성 및 브랜드 관리')">한요한</span></td>                        
+                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', '', '', '온라인 마케팅, 보도자료 작성 및 브랜드 관리')">한요한</span></td>                        
                     </tr>
                     <tr>
                         <td>봉사 팀장</td>
-                        <td><span class="name-link" onclick="openProfile('백희승', '봉사 팀장', ' ', 'Baek@ihan.or.kr', '전체총괄보조 및 봉사팀 관할')">백희승</span></td>                        
+                        <td><span class="name-link" onclick="openProfile('백희승', '봉사 팀장', '', 'Baek@ihan.or.kr', '전체총괄보조 및 봉사팀 관할')">백희승</span></td>                        
                     </tr>
                 </tbody>
             </table>
@@ -118,17 +127,19 @@
         <div class="profile-card">
             <span class="close-btn" onclick="closeProfile()">&times;</span>
             <h2 id="p-name">이름</h2>
-            <p id="p-position">직책</p> <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
+            <p id="p-position">직책</p>
+            
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
             
             <div class="profile-details">
-                <p><strong>연락처</strong> <span id="p-phone"></span></p>
-                <p><strong>이메일</strong> <span id="p-email"></span></p>
+                <p><strong>연락처</strong> <a id="p-phone-link" href=""><span id="p-phone"></span></a></p>
+                <p><strong>이메일</strong> <a id="p-email-link" href=""><span id="p-email"></span></a></p>
             </div>
 
             <hr class="task-divider">
             <div class="task-section">
                 <span class="task-title">[담당 업무]</span>
-                <div id="p-task">업무 상세 내용이 여기에 들어갑니다.</div>
+                <div id="p-task"></div>
             </div>
         </div>
     </div>
@@ -153,13 +164,19 @@
             loadHTML('main-footer', '/footer.html');
         });
 
-        // 프로필 팝업 열기 (task 매개변수 추가)
         function openProfile(name, position, phone, email, task) {
             document.getElementById('p-name').innerText = name;
             document.getElementById('p-position').innerText = position;
+            
+            // 텍스트 삽입
             document.getElementById('p-phone').innerText = phone;
             document.getElementById('p-email').innerText = email;
-            document.getElementById('p-task').innerText = task; // 담당업무 입력
+            document.getElementById('p-task').innerText = task;
+
+            // 하이퍼링크 속성(href) 동적 변경
+            document.getElementById('p-phone-link').href = "tel:" + phone;
+            document.getElementById('p-email-link').href = "mailto:" + email;
+
             document.getElementById('profileModal').style.display = 'flex';
         }
 
