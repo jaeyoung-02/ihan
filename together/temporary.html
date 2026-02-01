@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함께하는 분들 소개 - IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css"> 
+    
+    <style>
+        /* 기본 레이아웃 */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; }
+        
+        /* 테이블 스타일 */
+        .member-table { width: 100%; border-collapse: collapse; text-align: center; }
+        .member-table th { padding: 15px; border: 1px solid #ddd; background-color: #eee; }
+        .member-table td { padding: 15px; border: 1px solid #ddd; }
+        
+        /* 이름 클릭 스타일 */
+        .name-link { 
+            color: #0044cc; 
+            text-decoration: none; 
+            font-weight: 700; 
+            cursor: pointer; 
+        }
+        .name-link:hover { text-decoration: underline; }
+
+        /* --- 프로필 팝업(모달) 스타일 --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .profile-card {
+            background-color: #003366; /* 진한 파랑 */
+            width: 380px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #ffffff;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #ffffff;
+            font-size: 30px;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+        .close-btn:hover { opacity: 1; }
+
+        #p-name { font-size: 28px; margin-bottom: 5px; color: #ffffff; }
+        #p-position { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; }
+        
+        .profile-details { text-align: left; padding: 0 20px; }
+        .profile-details p { color: #D3D3D3; margin: 12px 0; font-size: 15px; }
+        .profile-details strong { color: #ffffff; margin-right: 10px; display: inline-block; width: 70px; }
+
+        /* 하이퍼링크 스타일 (전화, 이메일) */
+        .profile-details a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .profile-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* 담당 업무 섹션 구분선 */
+        .task-divider {
+            border: 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 20px 0;
+        }
+        .task-section { text-align: left; padding: 0 20px; }
+        .task-title { color: #ffffff; font-weight: bold; margin-bottom: 8px; display: block; }
+        #p-task { color: #D3D3D3; font-size: 14px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <header id="main-header"></header>
+
+    <main style="min-height: 600px;"> <br><br>
+        <div class="inside" style="padding: 0 10%;">
+            <h2 style="font-size: 30px; margin-bottom: 20px;">함께하는 분들</h2>
+            <hr style="border: 1px solid #000; margin-bottom: 30px;">
+            
+            <table class="member-table">
+                <thead>
+                    <tr>
+                        <th>소 속</th>
+                        <th>이 름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SOL(shine on light)</td>
+                        <td><span class="name-link" onclick="openProfile('윤도현', '대표', 'SOL(shine on light)', '', '자립청년 지원단체 쏠(@bridgesol_official )대표<br>기아대책 마이리얼멘토단 자립준비청년 멘토<br>초록우산x서부발전 청년 자립플러스+사업 자문위원<br>전 국민의힘 비상대책위원')">윤도현</span></td>                    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+    </main>
+
+    <div id="profileModal" class="modal-overlay">
+        <div class="profile-card">
+            <span class="close-btn" onclick="closeProfile()">&times;</span>
+            <h2 id="p-name">이름</h2>
+            <p id="p-position">직책</p>
+            
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
+            
+            <div class="profile-details">
+                <p><strong>소속</strong> <a id="p-phone-link" href=""><span id="p-phone"></span></a></p>
+                <p><strong>이메일</strong> <a id="p-email-link" href=""><span id="p-email"></span></a></p>
+            </div>
+
+            <hr class="task-divider">
+            <div class="task-section">
+                <span class="task-title">[경력]</span>
+                <div id="p-task"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="main-footer"></footer>
+
+
+    <script>
+    // 외부 파일(header, footer) 로드 함수
+    function loadHTML(id, url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById(id).innerHTML = data;
+            })
+            .catch(error => console.error('Error loading HTML:', error));
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        loadHTML('main-header', '/header.html');
+        loadHTML('main-footer', '/footer.html');
+    });
+
+    // 프로필 팝업 열기 함수
+    function openProfile(name, position, phone, email, task) {
+        document.getElementById('p-name').innerText = name;
+        document.getElementById('p-position').innerText = position;
+        
+        // 텍스트 삽입
+        document.getElementById('p-phone').innerText = phone;
+        document.getElementById('p-email').innerText = email;
+        
+        // [수정 포인트] innerText 대신 innerHTML을 사용하여 <br> 태그가 작동하게 합니다.
+        document.getElementById('p-task').innerHTML = task;
+
+        // 하이퍼링크 속성(href) 동적 변경
+        document.getElementById('p-email-link').href = "mailto split:" + email;
+
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    // 프로필 팝업 닫기 함수
+    function closeProfile() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    // 후원 팝업 모달 열기 함수 (헤더의 바로 후원하기 버튼용)
+    function openModal() {
+        document.getElementById('donationModal').style.display = 'flex';
+    }
+
+    // 후원 팝업 모달 닫기 함수
+    function closeModal() {
+        document.getElementById('donationModal').style.display = 'none';
+    }
+
+    // 팝업 바깥 영역 클릭 시 닫기 처리
+    window.onclick = function(event) {
+        const profileModal = document.getElementById('profileModal');
+        const donationModal = document.getElementById('donationModal');
+        
+        if (event.target == profileModal) {
+            closeProfile();
+        }
+        if (event.target == donationModal) {
+            closeModal();
+        }
+    }
+    </script>
+</body>
+</html>
