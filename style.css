@@ -1,21 +1,28 @@
+/* style.css 상단에 추가하여 부드러운 스크롤 적용 */
+html {
+    scroll-behavior: smooth;
+}
+
 /* style.css */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
+
 /* 헤더 스타일 */
-header {
+/* hero 섹션 수정 */
+.hero {
+    height: 600px; /* 높이는 적절히 조절 가능 */
+    background: #000000; /* 배경을 검은색으로 설정 */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 20px 5%;
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+    padding: 0 20px;
 }
+
 .logo { font-size: 24px; font-weight: bold; color: #003366; }
 nav ul { display: flex; gap: 30px; }
 nav ul li { font-weight: 500; position: relative; }
