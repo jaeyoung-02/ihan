@@ -7,6 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css"> 
     
+    <style>
+        /* 기본 레이아웃 스타일 */
+        body { font-family: 'Noto Sans KR', sans-serif; margin: 0; }
+        
+        /* 테이블 스타일 */
+        .member-table { width: 100%; border-collapse: collapse; text-align: center; }
+        .member-table th { padding: 15px; border: 1px solid #ddd; background-color: #eee; }
+        .member-table td { padding: 15px; border: 1px solid #ddd; }
+        
+        /* 이름 클릭 스타일 */
+        .name-link { 
+            color: #0044cc; 
+            text-decoration: none; 
+            font-weight: 700; 
+            cursor: pointer; 
+        }
+        .name-link:hover { text-decoration: underline; }
+
+        /* --- 프로필 팝업(모달) 스타일 --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* 배경 어둡게 */
+            display: none; /* 기본은 숨김 */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .profile-card {
+            background-color: #003366; /* 요청하신 진한 파랑 배경 */
+            width: 350px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #ffffff;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #ffffff;
+            font-size: 30px;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+        .close-btn:hover { opacity: 1; }
+
+        #p-name { font-size: 28px; margin-bottom: 5px; color: #ffffff; }
+        #p-role { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; } /* 밝은 하늘색 */
+        
+        .profile-details { text-align: left; padding: 0 20px; }
+        .profile-details p { color: #D3D3D3; margin: 12px 0; font-size: 15px; } /* 연한 회색 */
+        .profile-details strong { color: #ffffff; margin-right: 10px; }
+    </style>
 </head>
 <body>
     <header id="main-header"></header>
@@ -16,27 +74,25 @@
             <h2 style="font-size: 30px; margin-bottom: 20px;">사무국 구성원</h2>
             <hr style="border: 1px solid #000; margin-bottom: 30px;">
             
-            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+            <table class="member-table">
                 <thead>
-                    <tr style="background-color: #eee;">
-                        <th style="padding: 15px; border: 1px solid #ddd;">구 분</th>
-                        <th style="border: 1px solid #ddd;">이 름</th>
+                    <tr>
+                        <th>구 분</th>
+                        <th>이 름</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 15px; border: 1px solid #ddd;">대표</td>
-                        <td style="border: 1px solid #ddd;">김태경</td>
-                        <a href="/organization/profile/ceo" class="btn-donation" style="margin-top: 15px; background: #555;">직원보기</a>
-        </div>
+                        <td>대표</td>
+                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '02-123-4567', 'ceo@ihan.org')">김태경</span></td>                    
                     </tr>
                     <tr>
-                        <td style="padding: 15px; border: 1px solid #ddd;">행정 팀장</td>
-                        <td style="border: 1px solid #ddd;">하재영</td>                        
+                        <td>행정 팀장</td>
+                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '02-123-4568', 'admin@ihan.org')">하재영</span></td>                        
                     </tr>
                     <tr>
-                        <td style="padding: 15px; border: 1px solid #ddd;">홍보 팀장</td>
-                        <td style="border: 1px solid #ddd;">한요한</td>                        
+                        <td>홍보 팀장</td>
+                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', '02-123-4569', 'pr@ihan.org')">한요한</span></td>                        
                     </tr>
                 </tbody>
             </table>
@@ -44,10 +100,23 @@
         <br><br>
     </main>
 
+    <div id="profileModal" class="modal-overlay">
+        <div class="profile-card">
+            <span class="close-btn" onclick="closeProfile()">&times;</span>
+            <h2 id="p-name">이름</h2>
+            <p id="p-role">담당 업무</p>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
+            <div class="profile-details">
+                <p><strong>연락처</strong> <span id="p-phone"></span></p>
+                <p><strong>이메일</strong> <span id="p-email"></span></p>
+            </div>
+        </div>
+    </div>
+
     <footer id="main-footer"></footer>
 
     <script>
-        // DOMContentLoaded를 사용하면 HTML 구조가 로드된 직후 더 빠르게 실행됩니다.
+        // HTML 구성요소 로드 함수
         function loadHTML(id, url) {
             fetch(url)
                 .then(response => {
@@ -60,27 +129,33 @@
                 .catch(error => console.error('Error loading HTML:', error));
         }
 
+        // 페이지 로드 시 실행
         document.addEventListener("DOMContentLoaded", function() {
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
         });
-          // 기존 loadHTML 함수 아래에 추가하세요
-function openModal() {
-    document.getElementById('donationModal').style.display = 'flex';
-}
 
-function closeModal() {
-    document.getElementById('donationModal').style.display = 'none';
-}
+        // 프로필 팝업 열기
+        function openProfile(name, role, phone, email) {
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-role').innerText = role;
+            document.getElementById('p-phone').innerText = phone;
+            document.getElementById('p-email').innerText = email;
+            document.getElementById('profileModal').style.display = 'flex';
+        }
 
-// 팝업 바깥 영역 클릭 시 닫기
-window.onclick = function(event) {
-    const modal = document.getElementById('donationModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
-        
+        // 프로필 팝업 닫기
+        function closeProfile() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        // 팝업 바깥 영역 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('profileModal');
+            if (event.target == modal) {
+                closeProfile();
+            }
+        }
     </script>
 </body>
 </html>
