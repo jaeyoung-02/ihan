@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* 기본 레이아웃 및 배경 설정 */
+        /* 기본 레이아웃 */
         body {
             margin: 0;
             padding: 0;
@@ -19,52 +19,42 @@
             min-height: 100vh;
         }
 
-        /* 2. 헤더 가시성 강제 수정 (흰색 배경에서 글씨가 보이도록) */
+        /* 2. 헤더 스타일 - PC 및 모바일 공용 최적화 */
         #main-header {
-            width: 100%;
-            background-color: #ffffff !important; /* 배경 흰색 고정 */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            height: 80px;
+            width: 100% !important;
+            background-color: #ffffff !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10000 !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 0 5% !important;
+            min-height: 80px !important; /* 고정 높이 대신 최소 높이 지정 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            transition: all 0.3s ease;
         }
 
-        /* 헤더 내 로고 및 메뉴 글씨색 (어두운 네이비색으로 고정) */
+        /* 헤더 내 글자색 및 디자인 */
         #main-header .logo a,
         #main-header nav ul li a {
             color: #003366 !important; 
             font-weight: 600 !important;
-            text-decoration: none;
-        }
-
-        /* 바로 후원하기 버튼 가시성 확보 */
-        #main-header .btn-donation {
-            background-color: #003366 !important; /* 진한 네이비 배경 */
-            color: #ffffff !important;           /* 흰색 글자 */
-            padding: 10px 25px !important;
-            border-radius: 25px !important;
-            font-weight: bold !important;
-            display: inline-block !important;
             text-decoration: none !important;
         }
 
-        /* 드롭다운 메뉴 스타일 보정 */
-        #main-header .dropdown {
-            background-color: #ffffff !important;
-            border: 1px solid #eee;
-        }
-        #main-header .dropdown li a {
-            padding: 10px 20px !important;
-            font-size: 14px;
-            color: #003366 !important;
+        /* 후원하기 버튼 가시성 및 줄바꿈 방지 */
+        #main-header .btn-donation {
+            background-color: #003366 !important;
+            color: #ffffff !important;
+            padding: 8px 18px !important;
+            border-radius: 25px !important;
+            font-weight: 700 !important;
+            display: inline-block !important;
+            white-space: nowrap !important; /* 버튼 내 텍스트 줄바꿈 방지 */
         }
 
-        /* 메인 콘텐츠 영역 */
+        /* 3. 비전 콘텐츠 영역 */
         .vision-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -105,13 +95,6 @@
             padding: 40px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .vision-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #A5D8FF;
         }
 
         .vision-card h3 {
@@ -124,27 +107,33 @@
 
         .vision-card p {
             font-size: 1.05rem;
-            color: #E9ECEF;
             line-height: 1.7;
             text-align: justify;
         }
 
-        /* 하단 강조 구절 */
-        .vision-footer-msg {
-            text-align: center;
-            margin-top: 100px;
-            padding: 60px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-        }
-
-        .vision-footer-msg h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        /* 반응형 대응 */
+        /* 4. [중요] 모바일 헤더 튀어나옴 방지 (768px 이하) */
         @media (max-width: 768px) {
+            #main-header {
+                flex-direction: column !important; /* 가로에서 세로 정렬로 변경 */
+                padding: 15px 0 !important;
+                height: auto !important; /* 내용에 맞게 높이 자동 조절 */
+                gap: 10px;
+            }
+
+            #main-header nav ul {
+                display: flex !important;
+                flex-wrap: wrap !important; /* 메뉴가 많으면 다음 줄로 */
+                justify-content: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                gap: 12px !important;
+            }
+
+            #main-header nav ul li {
+                list-style: none !important;
+                font-size: 14px !important;
+            }
+
             .vision-header h1 { font-size: 2.2rem; }
             .vision-header p { font-size: 1.1rem; }
         }
@@ -204,7 +193,6 @@
     <footer id="main-footer"></footer>
 
     <script>
-        // HTML 파일 로드 함수
         function loadHTML(id, url) {
             fetch(url)
                 .then(response => {
@@ -222,7 +210,6 @@
             loadHTML('main-footer', '/footer.html');
         });
 
-        // 후원 모달 열기/닫기 함수 (header.html 대응)
         function openModal() {
             const modal = document.getElementById('donationModal');
             if(modal) modal.style.display = 'flex';
