@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 - IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css"> 
+</head>
+<body>
+    <header id="main-header"></header>
+
+    <main>
+        <section class="section">
+            <h2 class="section-title">소식 게시판</h2>
+            
+            <div class="board-container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                    <thead>
+                        <tr style="border-top: 2px solid #003366; border-bottom: 1px solid #ddd; background: #f9f9f9;">
+                            <th style="padding: 15px; width: 10%;">번호</th>
+                            <th style="padding: 15px; width: 60%; text-align: left;">제목</th>
+                            <th style="padding: 15px; width: 15%;">작성자</th>
+                            <th style="padding: 15px; width: 15%;">날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 15px; text-align: center;">1</td>
+                            <td style="padding: 15px; text-align: left;"><a href="#" style="font-weight: bold;">[공지] 비영리단체 IHAN 홈페이지 오픈 안내</a></td>
+                            <td style="padding: 15px; text-align: center;">관리자</td>
+                            <td style="padding: 15px; text-align: center;">2026.02.01</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 15px; text-align: center;">2</td>
+                            <td style="padding: 15px; text-align: left;"><a href="#">1월 자립준비청년 멘토링 후기</a></td>
+                            <td style="padding: 15px; text-align: center;">한요한</td>
+                            <td style="padding: 15px; text-align: center;">2026.01.28</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="text-align: right;">
+                    <a href="#" class="btn-donation" style="border-radius: 5px; font-size: 14px;">글쓰기</a>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; justify-content: center; gap: 10px;">
+                    <a href="#" style="padding: 5px 10px; border: 1px solid #ddd; color: #333;">1</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script>
+        function loadHTML(id, url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('파일 로드 실패');
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loadHTML('main-header', '/header.html');
+            loadHTML('main-footer', '/footer.html');
+        });
+
+        // 팝업 모달 함수 (후원 버튼용)
+        function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
