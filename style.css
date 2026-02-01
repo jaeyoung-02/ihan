@@ -118,3 +118,16 @@ nav ul li:hover .dropdown { display: block; }
     height: 1.2em; /* 글자보다 아주 약간 크게 설정하면 시각적으로 더 균형 잡혀 보입니다 */
     width: auto;
 }
+
+/* 헤더가 배경색 등에 묻히지 않도록 강제 설정 */
+#main-header {
+    background-color: #ffffff !important; /* 배경을 흰색으로 고정 */
+    color: #333333 !important;           /* 글자색을 어두운 색으로 고정 */
+    width: 100%;
+    display: flex;
+    z-index: 1000;
+}
+
+#main-header a {
+    color: #003366 !important;           /* 링크 색상 강제 지정 */
+}
