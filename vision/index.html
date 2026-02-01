@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비전 및 철학 - IHAN</title>
+    <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* 1. 기본 레이아웃 설정 */
+        /* 2. 비전 페이지 전용 스타일 */
         body {
             margin: 0;
             padding: 0;
@@ -18,20 +19,22 @@
             min-height: 100vh;
         }
 
-        /* 2. 헤더 공간 확보 및 깨짐 방지 */
+        /* 헤더 깨짐 방지: style.css의 설정을 유지하면서 배경색을 흰색으로 고정합니다 */
         #main-header {
             width: 100%;
             z-index: 1000;
-            /* 기존 헤더가 투명하거나 흰색일 경우를 대비해 배경 정의가 필요할 수 있습니다 */
-            background-color: #ffffff; 
+            background-color: #ffffff !important; 
+            display: flex; /* 요소 정렬을 위해 추가 */
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* 3. 메인 콘텐츠 영역 */
+        /* 메인 콘텐츠 영역 */
         .vision-container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 80px 20px;
-            flex: 1; /* 푸터를 하단으로 밀어내기 위함 */
+            flex: 1;
         }
 
         .vision-header {
@@ -55,7 +58,7 @@
 
         .highlight { color: #FFD43B; font-weight: 700; }
 
-        /* 4. 비전 카드 그리드 */
+        /* 비전 카드 그리드 */
         .vision-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -91,7 +94,7 @@
             text-align: justify;
         }
 
-        /* 5. 하단 강조 구절 */
+        /* 하단 강조 구절 */
         .vision-footer-msg {
             text-align: center;
             margin-top: 100px;
@@ -166,7 +169,7 @@
     <footer id="main-footer"></footer>
 
     <script>
-        // 기존 깃허브 웹사이트 구축 시 사용했던 로드 함수
+        // 공통 헤더/푸터 로드 함수
         function loadHTML(id, url) {
             fetch(url)
                 .then(response => {
@@ -180,10 +183,14 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // 경로 확인 필요: 프로젝트 루트에 있으면 /header.html, 아니면 header.html
+            // 루트 경로(/)를 명시하여 로드합니다
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
         });
+
+        // 헤더 내부의 '바로 후원하기' 버튼 작동을 위해 필요한 함수들
+        function openModal() { document.getElementById('donationModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('donationModal').style.display = 'none'; }
     </script>
 </body>
 </html>
