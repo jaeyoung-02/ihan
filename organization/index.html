@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/style.css"> 
     
     <style>
-        /* 기본 레이아웃 스타일 */
+        /* 기본 레이아웃 */
         body { font-family: 'Noto Sans KR', sans-serif; margin: 0; }
         
         /* 테이블 스타일 */
@@ -30,16 +30,16 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* 배경 어둡게 */
-            display: none; /* 기본은 숨김 */
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .profile-card {
-            background-color: #003366; /* 요청하신 진한 파랑 배경 */
-            width: 350px;
+            background-color: #003366; /* 진한 파랑 배경 */
+            width: 380px;
             padding: 40px 20px;
             border-radius: 20px;
             text-align: center;
@@ -59,11 +59,21 @@
         .close-btn:hover { opacity: 1; }
 
         #p-name { font-size: 28px; margin-bottom: 5px; color: #ffffff; }
-        #p-role { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; } /* 밝은 하늘색 */
+        #p-position { font-size: 18px; margin-bottom: 25px; color: #ADD8E6; } /* 직책: 밝은 하늘색 */
         
         .profile-details { text-align: left; padding: 0 20px; }
-        .profile-details p { color: #D3D3D3; margin: 12px 0; font-size: 15px; } /* 연한 회색 */
-        .profile-details strong { color: #ffffff; margin-right: 10px; }
+        .profile-details p { color: #D3D3D3; margin: 12px 0; font-size: 15px; }
+        .profile-details strong { color: #ffffff; margin-right: 10px; display: inline-block; width: 70px; }
+
+        /* 담당 업무 섹션 구분선 */
+        .task-divider {
+            border: 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 20px 0;
+        }
+        .task-section { text-align: left; padding: 0 20px; }
+        .task-title { color: #ffffff; font-weight: bold; margin-bottom: 8px; display: block; }
+        #p-task { color: #D3D3D3; font-size: 14px; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -84,15 +94,15 @@
                 <tbody>
                     <tr>
                         <td>대표</td>
-                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '-', 'bamel@ihan.or.kr')">김태경</span></td>                    
+                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '02-123-4567', 'ceo@ihan.org', '법인 총괄 운영 및 대외 협력')">김태경</span></td>                    
                     </tr>
                     <tr>
                         <td>행정 팀장</td>
-                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '02-123-4568', 'admin@ihan.org')">하재영</span></td>                        
+                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '02-123-4568', 'admin@ihan.org', '회계 관리, 인사 및 사무국 행정 총괄')">하재영</span></td>                        
                     </tr>
                     <tr>
                         <td>홍보 팀장</td>
-                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', '02-123-4569', 'pr@ihan.org')">한요한</span></td>                        
+                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', '02-123-4569', 'pr@ihan.org', '온라인 마케팅, 보도자료 작성 및 브랜드 관리')">한요한</span></td>                        
                     </tr>
                 </tbody>
             </table>
@@ -104,11 +114,17 @@
         <div class="profile-card">
             <span class="close-btn" onclick="closeProfile()">&times;</span>
             <h2 id="p-name">이름</h2>
-            <p id="p-role">담당 업무</p>
-            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
+            <p id="p-position">직책</p> <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px;">
+            
             <div class="profile-details">
                 <p><strong>연락처</strong> <span id="p-phone"></span></p>
                 <p><strong>이메일</strong> <span id="p-email"></span></p>
+            </div>
+
+            <hr class="task-divider">
+            <div class="task-section">
+                <span class="task-title">[담당 업무]</span>
+                <div id="p-task">업무 상세 내용이 여기에 들어갑니다.</div>
             </div>
         </div>
     </div>
@@ -116,7 +132,6 @@
     <footer id="main-footer"></footer>
 
     <script>
-        // HTML 구성요소 로드 함수
         function loadHTML(id, url) {
             fetch(url)
                 .then(response => {
@@ -129,27 +144,25 @@
                 .catch(error => console.error('Error loading HTML:', error));
         }
 
-        // 페이지 로드 시 실행
         document.addEventListener("DOMContentLoaded", function() {
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
         });
 
-        // 프로필 팝업 열기
-        function openProfile(name, role, phone, email) {
+        // 프로필 팝업 열기 (task 매개변수 추가)
+        function openProfile(name, position, phone, email, task) {
             document.getElementById('p-name').innerText = name;
-            document.getElementById('p-role').innerText = role;
+            document.getElementById('p-position').innerText = position;
             document.getElementById('p-phone').innerText = phone;
             document.getElementById('p-email').innerText = email;
+            document.getElementById('p-task').innerText = task; // 담당업무 입력
             document.getElementById('profileModal').style.display = 'flex';
         }
 
-        // 프로필 팝업 닫기
         function closeProfile() {
             document.getElementById('profileModal').style.display = 'none';
         }
 
-        // 팝업 바깥 영역 클릭 시 닫기
         window.onclick = function(event) {
             const modal = document.getElementById('profileModal');
             if (event.target == modal) {
@@ -159,3 +172,4 @@
     </script>
 </body>
 </html>
+
