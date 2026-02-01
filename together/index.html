@@ -135,58 +135,70 @@
     <footer id="main-footer"></footer>
 
     <script>
-        function loadHTML(id, url) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById(id).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading HTML:', error));
+    <script>
+    // 외부 파일(header, footer) 로드 함수
+    function loadHTML(id, url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById(id).innerHTML = data;
+            })
+            .catch(error => console.error('Error loading HTML:', error));
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        loadHTML('main-header', '/header.html');
+        loadHTML('main-footer', '/footer.html');
+    });
+
+    // 프로필 팝업 열기 함수
+    function openProfile(name, position, phone, email, task) {
+        document.getElementById('p-name').innerText = name;
+        document.getElementById('p-position').innerText = position;
+        
+        // 텍스트 삽입
+        document.getElementById('p-phone').innerText = phone;
+        document.getElementById('p-email').innerText = email;
+        
+        // [수정 포인트] innerText 대신 innerHTML을 사용하여 <br> 태그가 작동하게 합니다.
+        document.getElementById('p-task').innerHTML = task;
+
+        // 하이퍼링크 속성(href) 동적 변경
+        document.getElementById('p-email-link').href = "mailto split:" + email;
+
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    // 프로필 팝업 닫기 함수
+    function closeProfile() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    // 후원 팝업 모달 열기 함수 (헤더의 바로 후원하기 버튼용)
+    function openModal() {
+        document.getElementById('donationModal').style.display = 'flex';
+    }
+
+    // 후원 팝업 모달 닫기 함수
+    function closeModal() {
+        document.getElementById('donationModal').style.display = 'none';
+    }
+
+    // 팝업 바깥 영역 클릭 시 닫기 처리
+    window.onclick = function(event) {
+        const profileModal = document.getElementById('profileModal');
+        const donationModal = document.getElementById('donationModal');
+        
+        if (event.target == profileModal) {
+            closeProfile();
         }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            loadHTML('main-header', '/header.html');
-            loadHTML('main-footer', '/footer.html');
-        });
-
-        function openProfile(name, position, phone, email, task) {
-            document.getElementById('p-name').innerText = name;
-            document.getElementById('p-position').innerText = position;
-            
-            // 텍스트 삽입
-            document.getElementById('p-phone').innerText = phone;
-            document.getElementById('p-email').innerText = email;
-            document.getElementById('p-task').innerText = task;
-
-            // 하이퍼링크 속성(href) 동적 변경
-           
-            document.getElementById('p-email-link').href = "mailto:" + email;
-
-            document.getElementById('profileModal').style.display = 'flex';
+        if (event.target == donationModal) {
+            closeModal();
         }
-
-        function closeProfile() {
-            document.getElementById('profileModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('profileModal');
-            if (event.target == modal) {
-                closeProfile();
-            }
-        }
-        // 후원 팝업 모달 열기 함수
-function openModal() {
-    document.getElementById('donationModal').style.display = 'flex';
-}
-
-// 후원 팝업 모달 닫기 함수
-function closeModal() {
-    document.getElementById('donationModal').style.display = 'none';
-}
+    }
     </script>
 </body>
 </html>
