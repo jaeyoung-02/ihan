@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IHAN</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="main-header"></header>
@@ -13,28 +13,22 @@
     <main>
         <section class="hero">
             <img src="/images/logo.png" alt="IHAN 로고" style="width: 200px; height: auto;">
-            
             <h1 style="color: #00aaff; margin-top: 20px; font-size: 2.5rem;">이한(IHAN)</h1>
-            
-            <a href="#about-section" class="btn-donation" style="margin-top: 30px; padding: 15px 40px; cursor: pointer;">자세히 보기</a>
+            <a href="#about-section" class="btn-donation" style="margin-top: 30px;">자세히 보기</a>
         </section>
 
         <section id="about-section" class="section">
             <h2 class="section-title">IHAN(이한) 이란?</h2>
             <div class="card-container">
                 <div class="card">
-                    <div class="card-body">
-                        <h3>직원들을 소개합니다</h3>
-                        <p>복지를 위해 헌신하는 직원들 입니다.</p>
-                        <a href="/organization" class="btn-card">직원보기</a>
-                    </div>
+                    <h3>직원들을 소개합니다</h3>
+                    <p>복지를 위해 헌신하는 직원들 입니다.</p>
+                    <a href="/organization" class="btn-donation" style="margin-top: 15px; background: #555;">직원보기</a>
                 </div>
                 <div class="card">
-                    <div class="card-body">
-                        <h3>비전</h3>
-                        <p>우리의 비전을 소개합니다.</p>
-                        <a href="/vision" class="btn-card">비전 보기</a>
-                    </div>
+                    <h3>비전</h3>
+                    <p>우리의 비전을 소개합니다.</p>
+                    <a href="/vision" class="btn-donation" style="margin-top: 15px; background: #555;">비전 보기</a>
                 </div>
             </div>
         </section>
@@ -43,13 +37,12 @@
     <footer id="main-footer"></footer>
 
     <script>
+        // 외부 파일(header, footer) 로드 함수
         function loadHTML(id, url) {
             fetch(url)
                 .then(response => response.text())
-                .then(data => {
-                    document.getElementById(id).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading HTML:', error));
+                .then(data => { document.getElementById(id).innerHTML = data; })
+                .catch(error => console.error('Error:', error));
         }
 
         window.onload = function() {
