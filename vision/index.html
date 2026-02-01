@@ -3,120 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비전 및 철학 - IHAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* 1. 기본 레이아웃 설정 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Pretendard', sans-serif;
-            background-color: #002D5B; /* 비전 테마 배경색 */
-            color: #FFFFFF;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    <title>후원 및 봉사 - IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 
-        /* 2. 헤더 공간 확보 및 깨짐 방지 */
-        #main-header {
-            width: 100%;
-            z-index: 1000;
-            /* 기존 헤더가 투명하거나 흰색일 경우를 대비해 배경 정의가 필요할 수 있습니다 */
-            background-color: #ffffff; 
-        }
-
-        /* 3. 메인 콘텐츠 영역 */
-        .vision-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 80px 20px;
-            flex: 1; /* 푸터를 하단으로 밀어내기 위함 */
-        }
-
-        .vision-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .vision-header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            color: #FFFFFF;
-        }
-
-        .vision-header p {
-            font-size: 1.3rem;
-            color: #A5D8FF;
-            line-height: 1.6;
-            word-break: keep-all;
-        }
-
-        .highlight { color: #FFD43B; font-weight: 700; }
-
-        /* 4. 비전 카드 그리드 */
-        .vision-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .vision-card {
-            background: rgba(255, 255, 255, 0.07);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .vision-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: #A5D8FF;
-        }
-
-        .vision-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #A5D8FF;
-            border-left: 4px solid #FFD43B;
-            padding-left: 15px;
-        }
-
-        .vision-card p {
-            font-size: 1.05rem;
-            color: #E9ECEF;
-            line-height: 1.7;
-            text-align: justify;
-        }
-
-        /* 5. 하단 강조 구절 */
-        .vision-footer-msg {
-            text-align: center;
-            margin-top: 100px;
-            padding: 60px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-        }
-
-        .vision-footer-msg h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        /* 반응형 대응 */
-        @media (max-width: 768px) {
-            .vision-header h1 { font-size: 2.2rem; }
-            .vision-header p { font-size: 1.1rem; }
-        }
-    </style>
 </head>
 <body>
-
     <header id="main-header"></header>
 
-    <main class="vision-container">
+        <main class="vision-container">
         <section class="vision-header">
             <h1>우리의 비전</h1>
             <p>
@@ -165,25 +60,39 @@
 
     <footer id="main-footer"></footer>
 
+
+    <footer id="main-footer"></footer>
+
     <script>
-        // 기존 깃허브 웹사이트 구축 시 사용했던 로드 함수
         function loadHTML(id, url) {
             fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error('파일 로드 실패');
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(data => {
                     document.getElementById(id).innerHTML = data;
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error loading HTML:', error));
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // 경로 확인 필요: 프로젝트 루트에 있으면 /header.html, 아니면 header.html
+        window.onload = function() {
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
-        });
+        };
+          // 기존 loadHTML 함수 아래에 추가하세요
+function openModal() {
+    document.getElementById('donationModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('donationModal').style.display = 'none';
+}
+
+// 팝업 바깥 영역 클릭 시 닫기
+window.onclick = function(event) {
+    const modal = document.getElementById('donationModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
     </script>
 </body>
 </html>
