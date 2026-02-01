@@ -3,152 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>법인 비전 및 철학</title>
+    <title>구성원 소개 - IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            background-color: #002D5B; /* 메인 배경색: 딥블루 */
+        /* 기본 레이아웃 및 테마 */
+        body { 
+            margin: 0; 
+            font-family: 'Pretendard', sans-serif; 
+            background-color: #002D5B; /* 비전 페이지와 동일한 딥블루 */
             color: #FFFFFF;
-            line-height: 1.6;
         }
-
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 80px 20px;
         }
 
-        /* 메인 제목 섹션 */
-        .header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
+        h2.section-title {
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 24px;
-            letter-spacing: -0.05rem;
-        }
-
-        .header p {
-            font-size: 1.25rem;
-            color: #A5D8FF; /* 강조 텍스트 색상 */
-            max-width: 800px;
-            margin: 0 auto;
-            word-break: keep-all;
-        }
-
-        .highlight {
-            color: #FFD43B; /* 포인트 컬러: 옐로우 */
-            font-weight: 700;
-        }
-
-        /* 철학 카드 섹션 */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #A5D8FF;
-            border-left: 4px solid #A5D8FF;
-            padding-left: 15px;
-        }
-
-        .card p {
-            font-size: 1.05rem;
-            color: #E9ECEF;
-            text-align: justify;
-        }
-
-        /* 하단 푸터성 메시지 */
-        .footer-msg {
+            margin-bottom: 40px;
             text-align: center;
-            margin-top: 100px;
-            padding: 60px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
         }
 
-        .footer-msg h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+        /* 테이블 스타일 개선 */
+        .member-table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .header p { font-size: 1.1rem; }
+        .member-table th { 
+            padding: 20px; 
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: #A5D8FF;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        .member-table td { 
+            padding: 20px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        /* 이름 클릭 스타일 (포인트 컬러) */
+        .name-link { 
+            color: #FFD43B; /* 비전 페이지 포인트 옐로우 */
+            text-decoration: none; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: 0.2s;
+        }
+        .name-link:hover { text-decoration: underline; opacity: 0.8; }
+
+        /* --- 프로필 모달 스타일 --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .profile-card {
+            background-color: #003366; 
+            width: 90%;
+            max-width: 400px;
+            padding: 50px 30px;
+            border-radius: 25px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            color: #ffffff;
+            border: 1px solid rgba(165, 216, 255, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #p-name { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+        #p-position { font-size: 18px; color: #A5D8FF; margin-bottom: 30px; font-weight: 600; }
+        
+        .profile-details { text-align: left; margin-bottom: 30px; }
+        .profile-details p { color: #E9ECEF; margin: 15px 0; font-size: 16px; }
+        .profile-details strong { color: #A5D8FF; margin-right: 15px; display: inline-block; width: 60px; }
+
+        .profile-details a { color: #FFFFFF; text-decoration: none; }
+        .profile-details a:hover { text-decoration: underline; }
+
+        .task-section { 
+            text-align: left; 
+            padding: 20px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 15px;
+        }
+        .task-title { color: #A5D8FF; font-weight: bold; margin-bottom: 10px; display: block; }
+        #p-task { color: #D3D3D3; font-size: 15px; line-height: 1.6; word-break: keep-all; }
     </style>
 </head>
 <body>
+    <header id="main-header"></header>
 
-<div class="container">
-    <header class="header">
-        <h1>우리의 비전</h1>
-        <p>
-            단순한 지원을 넘어, <span class="highlight">‘의지 가능한 관계와 환경’</span>을 설계합니다.<br>
-            우리는 아동·청소년이 삶의 신뢰를 회복하고, 스스로의 정체성을 찾아 건강하게 자립할 수 있도록 돕습니다.
-        </p>
-    </header>
-
-    <div class="grid">
-        <div class="card">
-            <h3>01. 관계의 구조적 회복</h3>
-            <p>개인의 의지 문제가 아닌 '관계 학습의 기회 부재'를 주목합니다. 배신당하지 않는 안정적인 관계 경험을 통해 인간관계에 대한 기본 신뢰를 다시 세웁니다.</p>
+    <main>
+        <div class="container">
+            <h2 class="section-title">구성원 소개</h2>
+            
+            <table class="member-table">
+                <thead>
+                    <tr>
+                        <th>구 분</th>
+                        <th>이 름</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>대표</td>
+                        <td><span class="name-link" onclick="openProfile('김태경', '대표', '', 'bamel@ihan.or.kr', '단체 총괄 운영 및 대외 협력')">김태경</span></td>                    
+                    </tr>
+                    <tr>
+                        <td>행정 팀장</td>
+                        <td><span class="name-link" onclick="openProfile('하재영', '행정 팀장', '070-8983-2821', 'jaeyoung@ihan.or.kr', '회계 관리, 인사 및 사무국 행정 총괄')">하재영</span></td>                        
+                    </tr>
+                    <tr>
+                        <td>홍보 팀장</td>
+                        <td><span class="name-link" onclick="openProfile('한요한', '홍보 팀장', '', '', '온라인 마케팅, 보도자료 작성 및 브랜드 관리')">한요한</span></td>                        
+                    </tr>
+                    <tr>
+                        <td>봉사 팀장</td>
+                        <td><span class="name-link" onclick="openProfile('백희승', '봉사 팀장', '', 'Baek@ihan.or.kr', '전체총괄보조 및 봉사팀 관할')">백희승</span></td>                        
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </main>
 
-        <div class="card">
-            <h3>02. 존엄을 지키는 지원</h3>
-            <p>시혜적이고 일방적인 도움을 지양합니다. 참여자가 스스로 선택하고 머무를 수 있는 환경을 설계하여 개인의 존엄과 자율성을 최우선으로 존중합니다.</p>
-        </div>
+    <div id="profileModal" class="modal-overlay">
+        <div class="profile-card">
+            <span class="close-btn" onclick="closeProfile()">&times;</span>
+            <h2 id="p-name">이름</h2>
+            <p id="p-position">직책</p>
+            
+            <div class="profile-details">
+                <p><strong>연락처</strong> <a id="p-phone-link" href=""><span id="p-phone"></span></a></p>
+                <p><strong>이메일</strong> <a id="p-email-link" href=""><span id="p-email"></span></a></p>
+            </div>
 
-        <div class="card">
-            <h3>03. 삶의 의미와 정체성</h3>
-            <p>'어떻게 살아남을 것인가'를 넘어 '나는 누구인가'를 고민할 수 있도록 돕습니다. 스스로 삶의 가치를 사유하고 표현할 수 있는 장을 마련합니다.</p>
-        </div>
-
-        <div class="card">
-            <h3>04. 결핍에서 자원으로</h3>
-            <p>상처와 결핍을 숨겨야 할 결함이 아닌, 공감과 통찰의 원천으로 재해석합니다. 과거를 부정하지 않고 사회적 기여로 전환하는 힘을 기릅니다.</p>
-        </div>
-
-        <div class="card">
-            <h3>05. 신뢰 가능한 시스템</h3>
-            <p>개인의 선의에만 의존하지 않습니다. 지속 가능한 리듬과 규칙이 있는 환경을 설계하여, 누구나 안심하고 참여할 수 있는 안전한 구조를 만듭니다.</p>
-        </div>
-
-        <div class="card">
-            <h3>06. 함께 만드는 미래</h3>
-            <p>고립과 불안 등 장기적인 사회 문제를 예방합니다. 개인의 회복이 사회적 연결로 이어지는 건강한 선순환 구조를 구축하여 모두의 삶의 질을 개선합니다.</p>
+            <div class="task-section">
+                <span class="task-title">[담당 업무]</span>
+                <div id="p-task"></div>
+            </div>
         </div>
     </div>
 
-    <section class="footer-msg">
-        <h2>"사람 이전에 환경을 신뢰하게 합니다"</h2>
-        <p>우리는 흔들리지 않는 든든한 토양이 되어, 당신의 자립 여정을 끝까지 함께하겠습니다.</p>
-    </section>
-</div>
+    <footer id="main-footer"></footer>
 
+    <script>
+        // 공통 헤더/푸터 로드 함수
+        function loadHTML(id, url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                })
+                .catch(error => console.error('Error loading HTML:', error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loadHTML('main-header', '/header.html');
+            loadHTML('main-footer', '/footer.html');
+        });
+
+        // 모달 제어 함수
+        function openProfile(name, position, phone, email, task) {
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-position').innerText = position;
+            document.getElementById('p-phone').innerText = phone || '정보 없음';
+            document.getElementById('p-email').innerText = email || '정보 없음';
+            document.getElementById('p-task').innerText = task;
+
+            document.getElementById('p-phone-link').href = phone ? "tel:" + phone : "#";
+            document.getElementById('p-email-link').href = email ? "mailto:" + email : "#";
+
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+
+        function closeProfile() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        // 바깥 영역 클릭 시 닫기
+        window.onclick = function(event) {
+            const modal = document.getElementById('profileModal');
+            if (event.target == modal) {
+                closeProfile();
+            }
+        }
+    </script>
 </body>
 </html>
