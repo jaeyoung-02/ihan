@@ -104,3 +104,14 @@ nav ul li:hover .dropdown { display: block; }
         padding: 50px 5%;
     }
 }
+
+/* style.css에 추가 */
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body .btn-donation {
+    align-self: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    margin-top: 15px;      /* 텍스트와 버튼 사이 간격 */
+}
