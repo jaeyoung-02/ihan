@@ -3,59 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비전 - IHAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
-
-</head>
-<body>
-    <header id="main-header"></header>
-
-<main>
-
-
-
-
-
-
-</main>
- <footer id="main-footer"></footer>
-
-    <script>
-        function loadHTML(id, url) {
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(id).innerHTML = data;
-                })
-                .catch(error => console.error('Error loading HTML:', error));
+    <title>법인 비전 및 철학</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: #002D5B; /* 메인 배경색: 딥블루 */
+            color: #FFFFFF;
+            line-height: 1.6;
         }
 
-        window.onload = function() {
-            loadHTML('main-header', '/header.html');
-            loadHTML('main-footer', '/footer.html');
-        };
-          // 기존 loadHTML 함수 아래에 추가하세요
-function openModal() {
-    document.getElementById('donationModal').style.display = 'flex';
-}
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
 
-function closeModal() {
-    document.getElementById('donationModal').style.display = 'none';
-}
+        /* 메인 제목 섹션 */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
 
-// 팝업 바깥 영역 클릭 시 닫기
-window.onclick = function(event) {
-    const modal = document.getElementById('donationModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
-    </script>
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.05rem;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: #A5D8FF; /* 강조 텍스트 색상 */
+            max-width: 800px;
+            margin: 0 auto;
+            word-break: keep-all;
+        }
+
+        .highlight {
+            color: #FFD43B; /* 포인트 컬러: 옐로우 */
+            font-weight: 700;
+        }
+
+        /* 철학 카드 섹션 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #A5D8FF;
+            border-left: 4px solid #A5D8FF;
+            padding-left: 15px;
+        }
+
+        .card p {
+            font-size: 1.05rem;
+            color: #E9ECEF;
+            text-align: justify;
+        }
+
+        /* 하단 푸터성 메시지 */
+        .footer-msg {
+            text-align: center;
+            margin-top: 100px;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+        }
+
+        .footer-msg h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .header p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <h1>우리의 비전</h1>
+        <p>
+            단순한 지원을 넘어, <span class="highlight">‘의지 가능한 관계와 환경’</span>을 설계합니다.<br>
+            우리는 아동·청소년이 삶의 신뢰를 회복하고, 스스로의 정체성을 찾아 건강하게 자립할 수 있도록 돕습니다.
+        </p>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h3>01. 관계의 구조적 회복</h3>
+            <p>개인의 의지 문제가 아닌 '관계 학습의 기회 부재'를 주목합니다. 배신당하지 않는 안정적인 관계 경험을 통해 인간관계에 대한 기본 신뢰를 다시 세웁니다.</p>
+        </div>
+
+        <div class="card">
+            <h3>02. 존엄을 지키는 지원</h3>
+            <p>시혜적이고 일방적인 도움을 지양합니다. 참여자가 스스로 선택하고 머무를 수 있는 환경을 설계하여 개인의 존엄과 자율성을 최우선으로 존중합니다.</p>
+        </div>
+
+        <div class="card">
+            <h3>03. 삶의 의미와 정체성</h3>
+            <p>'어떻게 살아남을 것인가'를 넘어 '나는 누구인가'를 고민할 수 있도록 돕습니다. 스스로 삶의 가치를 사유하고 표현할 수 있는 장을 마련합니다.</p>
+        </div>
+
+        <div class="card">
+            <h3>04. 결핍에서 자원으로</h3>
+            <p>상처와 결핍을 숨겨야 할 결함이 아닌, 공감과 통찰의 원천으로 재해석합니다. 과거를 부정하지 않고 사회적 기여로 전환하는 힘을 기릅니다.</p>
+        </div>
+
+        <div class="card">
+            <h3>05. 신뢰 가능한 시스템</h3>
+            <p>개인의 선의에만 의존하지 않습니다. 지속 가능한 리듬과 규칙이 있는 환경을 설계하여, 누구나 안심하고 참여할 수 있는 안전한 구조를 만듭니다.</p>
+        </div>
+
+        <div class="card">
+            <h3>06. 함께 만드는 미래</h3>
+            <p>고립과 불안 등 장기적인 사회 문제를 예방합니다. 개인의 회복이 사회적 연결로 이어지는 건강한 선순환 구조를 구축하여 모두의 삶의 질을 개선합니다.</p>
+        </div>
+    </div>
+
+    <section class="footer-msg">
+        <h2>"사람 이전에 환경을 신뢰하게 합니다"</h2>
+        <p>우리는 흔들리지 않는 든든한 토양이 되어, 당신의 자립 여정을 끝까지 함께하겠습니다.</p>
+    </section>
+</div>
+
 </body>
 </html>
-
-
-
-
-
