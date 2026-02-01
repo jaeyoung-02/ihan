@@ -3,78 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>후원 및 봉사 - IHAN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <title>비전 및 철학 - IHAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* 1. 기본 레이아웃 설정 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #002D5B; /* 비전 테마 배경색 */
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
+        /* 2. 헤더 공간 확보 및 깨짐 방지 */
+        #main-header {
+            width: 100%;
+            z-index: 1000;
+            /* 기존 헤더가 투명하거나 흰색일 경우를 대비해 배경 정의가 필요할 수 있습니다 */
+            background-color: #ffffff; 
+        }
+
+        /* 3. 메인 콘텐츠 영역 */
+        .vision-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            flex: 1; /* 푸터를 하단으로 밀어내기 위함 */
+        }
+
+        .vision-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .vision-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #FFFFFF;
+        }
+
+        .vision-header p {
+            font-size: 1.3rem;
+            color: #A5D8FF;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        .highlight { color: #FFD43B; font-weight: 700; }
+
+        /* 4. 비전 카드 그리드 */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .vision-card {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #A5D8FF;
+        }
+
+        .vision-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #A5D8FF;
+            border-left: 4px solid #FFD43B;
+            padding-left: 15px;
+        }
+
+        .vision-card p {
+            font-size: 1.05rem;
+            color: #E9ECEF;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* 5. 하단 강조 구절 */
+        .vision-footer-msg {
+            text-align: center;
+            margin-top: 100px;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+        }
+
+        .vision-footer-msg h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* 반응형 대응 */
+        @media (max-width: 768px) {
+            .vision-header h1 { font-size: 2.2rem; }
+            .vision-header p { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
+
     <header id="main-header"></header>
 
-    <main>
-        <section class="nohuwon-1">
-            <h2 class="section-title">후원 및 봉사 안내</h2>
-            <div class="card-container">
-                <div class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>후원</h3>
-                        <p>정기적인 만남을 통해 아이들에게 평생의 가족이 되어주세요.</p>
-                        <a href="https://forms.gle/vwGc77xiHRRAiQii9" class="btn-donation" class="btn-card">신청하기</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>멘토링</h3>
-                        <p>인간관계에 대한 기본 신뢰를 회복하도록 돕는 것을 목적으로 멘토링을 진행 합니다</p>
-                        <a href="#" class="btn-donation" class="btn-card">신청하기</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img"></div>
-                    <div class="card-body">
-                        <h3>자립준비청년 후원</h3>
-                        <p>청년들에게 오늘을 살아갈 수 있는 힘이 되어 주세요.</p>
-                        <a href="#" class="btn-donation" class="btn-card">신청하기</a>
-                    </div>
-                </div>
-            </div>
+    <main class="vision-container">
+        <section class="vision-header">
+            <h1>우리의 비전</h1>
+            <p>
+                단순한 물질적 지원을 넘어, <span class="highlight">‘의지 가능한 관계와 환경’</span>을 설계합니다.<br>
+                실패해도 다시 일어설 수 있는 든든한 신뢰의 토대를 만드는 것, 우리의 존재 이유입니다.
+            </p>
         </section>
+
+        <div class="vision-grid">
+            <div class="vision-card">
+                <h3>관계의 구조적 회복</h3>
+                <p>배신당하지 않는 관계를 학습할 기회를 제공합니다. 외로움과 불신을 개인의 탓으로 돌리지 않고, 안정적인 '의지 경험'을 통해 삶의 기본 신뢰를 회복합니다.</p>
+            </div>
+
+            <div class="vision-card">
+                <h3>존엄을 지키는 지원</h3>
+                <p>일방적인 시혜를 지양하고 참여자의 자율성을 존중합니다. 스스로 선택하고 머무를 수 있는 환경을 통해 개인의 존엄이 훼손되지 않는 지원 모델을 구축합니다.</p>
+            </div>
+
+            <div class="vision-card">
+                <h3>정체성과 의미 형성</h3>
+                <p>생존을 넘어 '나는 누구인가'를 질문할 수 있는 여유를 제공합니다. 자신의 삶을 스스로 사유하고 표현하며 고유한 정체성을 찾아가도록 돕습니다.</p>
+            </div>
+
+            <div class="vision-card">
+                <h3>결핍의 가치 전환</h3>
+                <p>과거의 상처와 결핍을 숨겨야 할 결함이 아닌, 공감과 창의성의 원천으로 재해석합니다. 이를 통해 삶의 방향성을 찾고 사회에 기여하는 힘을 기릅니다.</p>
+            </div>
+
+            <div class="vision-card">
+                <h3>시스템을 통한 안전</h3>
+                <p>사람의 선의에만 의존하지 않고, 규칙과 리듬이 있는 안정된 시스템을 설계합니다. 환경 자체를 신뢰하게 함으로써 관계에 대한 두려움을 최소화합니다.</p>
+            </div>
+
+            <div class="vision-card">
+                <h3>지속 가능한 사회 기여</h3>
+                <p>보호 종료 후의 고립과 사회적 단절을 예방합니다. 개인의 회복이 사회적 위험 감소로 이어지는 선순환 구조를 만들어 모두의 삶의 질을 높입니다.</p>
+            </div>
+        </div>
+
+        <div class="vision-footer-msg">
+            <h2>"신뢰할 수 있는 환경이 사람을 바꿉니다"</h2>
+            <p>우리는 당신이 세상에 기대어 일어설 수 있는 가장 안전한 첫 번째 환경이 되겠습니다.</p>
+        </div>
     </main>
 
     <footer id="main-footer"></footer>
 
     <script>
+        // 기존 깃허브 웹사이트 구축 시 사용했던 로드 함수
         function loadHTML(id, url) {
             fetch(url)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) throw new Error('파일 로드 실패');
+                    return response.text();
+                })
                 .then(data => {
                     document.getElementById(id).innerHTML = data;
                 })
-                .catch(error => console.error('Error loading HTML:', error));
+                .catch(error => console.error('Error:', error));
         }
 
-        window.onload = function() {
+        document.addEventListener("DOMContentLoaded", function() {
+            // 경로 확인 필요: 프로젝트 루트에 있으면 /header.html, 아니면 header.html
             loadHTML('main-header', '/header.html');
             loadHTML('main-footer', '/footer.html');
-        };
-          // 기존 loadHTML 함수 아래에 추가하세요
-function openModal() {
-    document.getElementById('donationModal').style.display = 'flex';
-}
-
-function closeModal() {
-    document.getElementById('donationModal').style.display = 'none';
-}
-
-// 팝업 바깥 영역 클릭 시 닫기
-window.onclick = function(event) {
-    const modal = document.getElementById('donationModal');
-    if (event.target == modal) {
-        closeModal();
-    }
-}
+        });
     </script>
 </body>
 </html>
