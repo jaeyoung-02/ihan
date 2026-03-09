@@ -25,55 +25,19 @@
     </ul>
 </nav>
 <div class="nav-buttons">
-    <a href="javascript:void(0);" class="btn-donation" onclick="openModal()">바로 후원하기</a>
+    <a href="https://www.payapp.kr/L/z49INB" target="_blank" class="btn-donation">바로 후원하기</a>
 </div>
 
-<script src="https://js.bootpay.co.kr/bootpay-5.2.8.min.js" type="application/javascript"></script>
-
 <script>
-/**
- * 바로 후원하기 버튼 클릭 시 실행되는 함수
- * 기존 모달 창 대신 부트페이 결제창을 호출합니다.
- */
-async function openModal() {
-    try {
-        const response = await Bootpay.requestPayment({
-            "application_id": "YOUR_APPLICATION_ID_HERE", // [중요] 부트페이 관리자 페이지에서 발급받은 'Web용 Application ID'를 입력하세요.
-            "price": 10000, // 기본 후원 금액 (예: 10,000원)
-            "order_name": "IHAN 일시 후원", // 결제 상품명
-            "order_id": "IHAN_" + new Date().getTime(), // 고유 주문 번호 생성
-            "pg": "kcp", // 사용하실 PG사 (kcp, danal, nicepay 등 설정 가능)
-            "method": "card", // 기본 결제 수단 (card, phone, bank 등)
-            "user": {
-                "id": "ihan_user",
-                "username": "후원자",
-                "email": "admin@ihan.or.kr" // 단체 이메일 기본값
-            },
-            "extra": {
-                "open_type": "iframe", // 결제창 출력 방식 (iframe, popup)
-                "card_quota": "0", // 할부 개월수 설정 (0은 일시불)
-                "escrow": false
-            }
-        });
-
-        // 결제가 완료되었을 때 처리 (예: 감사 메시지 또는 데이터 저장)
-        console.log("결제 완료:", response);
-        alert("후원에 참여해 주셔서 진심으로 감사합니다.");
-
-    } catch (e) {
-        // 결제창을 닫거나 에러가 발생했을 때 처리
-        console.error("결제 중단 또는 에러:", e.message);
+    // 기존에 사용하던 openModal 및 closeModal 함수는 더 이상 필요하지 않으므로 제거하거나 유지할 수 있습니다.
+    function openModal() {
+        // 버튼에서 직접 링크로 이동하므로 이 함수는 더 이상 호출되지 않습니다.
     }
-}
 
-/**
- * 기존 코드와의 호환성을 위해 함수명은 유지하되, 
- * 필요한 경우에만 호출하도록 구성합니다.
- */
-function closeModal() {
-    const modal = document.getElementById('donationModal');
-    if (modal) {
-        modal.style.display = 'none';
+    function closeModal() {
+        const modal = document.getElementById('donationModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
     }
-}
 </script>
