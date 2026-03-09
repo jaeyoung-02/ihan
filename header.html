@@ -25,19 +25,21 @@
     </ul>
 </nav>
 <div class="nav-buttons">
-    <a href="https://www.payapp.kr/L/z49INB" target="_blank" class="btn-donation">바로 후원하기</a>
+    <a href="javascript:void(0);" class="btn-donation" onclick="openModal()">바로 후원하기</a>
 </div>
 
-<script>
-    // 기존에 사용하던 openModal 및 closeModal 함수는 더 이상 필요하지 않으므로 제거하거나 유지할 수 있습니다.
-    function openModal() {
-        // 버튼에서 직접 링크로 이동하므로 이 함수는 더 이상 호출되지 않습니다.
-    }
+<div id="donationModal" class="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:2000; justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:#fff; width:90%; max-width:400px; padding:30px; border-radius:15px; position:relative; text-align:center;">
+        <span class="close-btn" onclick="closeModal()" style="position:absolute; top:10px; right:20px; font-size:24px; cursor:pointer;">&times;</span>
+        <h3 style="margin-bottom:15px;">후원 안내</h3>
+        <p>비영리단체 IHAN과 함께해주셔서 감사합니다.</p>
+        
+        <div style="margin:20px 0; background:#f9f9f9; padding:15px; border-radius:10px;">
+            <p><strong>연락처:</strong> <a href="tel:07089832821" style="color:#003366; text-decoration:underline;">070-8983-2821</a></p>
+        </div>
 
-    function closeModal() {
-        const modal = document.getElementById('donationModal');
-        if (modal) {
-            modal.style.display = 'none';
-        }
-    }
-</script>
+        <a href="https://forms.gle/vwGc77xiHRRAiQii9" target="_blank" class="btn-donation" style="display:block; width:100%; margin-bottom:10px;">후원 신청 폼 작성</a>
+        
+        <button class="btn-donation" onclick="closeModal()" style="display:block; width:100%; background:#666; border:none; cursor:pointer;">닫기</button>
+    </div>
+</div>
